@@ -1,0 +1,26 @@
+.home-header {
+  margin-bottom: var(--space-xl);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-buttons {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .home-header {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .home-buttons {
+    flex-direction: column;
+
+    width: 100%;
+  }
+}

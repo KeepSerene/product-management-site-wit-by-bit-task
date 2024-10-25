@@ -1,0 +1,111 @@
+.app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--color-text-main);
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.page-title {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-xl);
+  color: var(--color-text-main);
+}
+
+.button-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 4px;
+  padding: var(--space-sm) var(--space-md);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+
+  transition: opacity 250ms ease-in-out;
+}
+
+.button-primary:where(:hover, :focus-visible) {
+  opacity: 0.9;
+}
+
+.button-secondary {
+  background-color: var(--color-button-secondary);
+  color: var(--color-text-main);
+  border: none;
+  border-radius: 4px;
+  padding: var(--space-sm) var(--space-md);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+
+  transition: background-color 250ms ease-in-out;
+}
+
+.button-secondary:where(:hover, :focus-visible) {
+  background-color: hsl(204, 20%, 85%);
+}
+
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-sm);
+}
+
+.form-input {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: var(--space-sm);
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin-top: var(--space-xs);
+}
+
+/* Tablet styles */
+@media (max-width: 992px) {
+  .app-wrapper {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .app-wrapper {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+  }
+}
+
+/* Screen reader only element styles */
+.sr-only {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+
+  position: absolute;
+  left: -99999px;
+  top: auto;
+}

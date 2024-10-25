@@ -1,0 +1,43 @@
+.price-info-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.price-field {
+  position: relative;
+}
+
+.currency-symbol {
+  color: var(--color-text-secondary);
+
+  position: absolute;
+  left: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.price-input {
+  padding-left: calc(var(--space-lg) + var(--space-sm));
+}
+
+.discount-row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.discount-toggle-btn .toggle-button {
+  overflow: unset;
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .discount-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .discount-row .toggle-button {
+    margin-top: var(--space-sm);
+  }
+}

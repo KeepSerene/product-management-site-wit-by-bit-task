@@ -1,0 +1,22 @@
+.description-form {
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.upload-button {
+  background-color: var(--color-button-secondary);
+  color: var(--color-text-main);
+  border: none;
+  border-radius: 4px;
+  padding: var(--space-sm) var(--space-md);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+
+  transition: background-color 250ms ease-in-out;
+}
+
+.upload-button:where(:hover, :focus-visible) {
+  background-color: hsl(204, 20%, 85%);
+}

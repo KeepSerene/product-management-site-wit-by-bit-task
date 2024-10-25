@@ -1,0 +1,17 @@
+.add-product {
+  max-width: 800px;
+  margin-inline: auto;
+  padding: var(--space-lg);
+}
+
+.add-product-content {
+  margin-block: var(--space-xl);
+}
+
+.form-buttons {
+  margin-top: var(--space-xl);
+
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md);
+}

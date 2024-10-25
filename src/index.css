@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap");
+
+:root {
+  /* Fonts */
+  --font-primary: "Sofia Sans", sans-serif;
+
+  /* Color Palette */
+  --color-primary: hsl(203, 74%, 47%);
+  --color-background: hsl(0, 0%, 96%);
+  --color-text-main: hsl(0, 0%, 0%);
+  --color-text-secondary: hsl(0, 0%, 50%);
+  --color-button-secondary: hsl(204, 20%, 90%);
+  --color-card-background: hsla(0, 0%, 85%, 0.4);
+  --color-white: hsl(0, 0%, 100%);
+  --color-error: hsl(0, 85%, 55%);
+  --color-tag-background: hsl(0, 0%, 94%);
+  --color-disabled: hsla(200, 32%, 93%, 0.6);
+  --color-border: hsla(0, 0%, 0%, 0.18);
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+}
+
+/* Responsive breakpoints:
+  Mobiles <= 600px
+  601px <= Tablets <= 900px
+  Desktops >= 901px
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+img,
+figure,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  object-fit: cover;
+}
+
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+p,
+li,
+figcaption,
+address {
+  max-width: 65ch;
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+address {
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-secondary);
+  font-family: var(--font-primary);
+}
