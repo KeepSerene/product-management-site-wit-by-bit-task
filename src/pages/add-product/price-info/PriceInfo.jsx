@@ -1,17 +1,36 @@
 import "./PriceInfo.css";
 
-// React imports
-import { useState } from "react";
-
 // Component imports
 import ToggleButton from "../../../components/toggle-button/ToggleButton";
 
+// Context imports
+import { useProductContext } from "../../../contexts/ProductContext";
+
 function PriceInfo() {
-  const [priceInfo, setPriceInfo] = useState({
-    price: "12000",
-    discount: "12",
-    discountMethod: "pct",
-  });
+  const { productData, setProductData } = useProductContext();
+
+  const handlePriceChange = (value) => {
+    setProductData((prev) => ({
+      ...prev,
+      priceInfo: {
+        ...prev.priceInfo,
+        priceInr: value,
+      },
+    }));
+  };
+
+  const handleDiscountChange = (value, field) => {
+    setProductData((prev) => ({
+      ...prev,
+      priceInfo: {
+        ...prev.priceInfo,
+        discount: {
+          ...prev.priceInfo.discount,
+          [field]: value,
+        },
+      },
+    }));
+  };
 
   return (
     <div className="price-info-form">
@@ -26,10 +45,8 @@ function PriceInfo() {
           <input
             type="number"
             id="price-input"
-            value={priceInfo.price}
-            onChange={(event) =>
-              setPriceInfo({ ...priceInfo, price: event.target.value })
-            }
+            value={productData.priceInfo.priceInr}
+            onChange={(event) => handlePriceChange(event.target.value)}
             className="form-input price-input"
           />
         </div>
@@ -44,9 +61,9 @@ function PriceInfo() {
           <input
             type="number"
             id="discount-input"
-            value={priceInfo.discount}
+            value={productData.priceInfo.discount.value}
             onChange={(event) =>
-              setPriceInfo({ ...priceInfo, discount: event.target.value })
+              handleDiscountChange(event.target.value, "value")
             }
             className="form-input"
           />
@@ -57,10 +74,8 @@ function PriceInfo() {
                 { value: "pct", label: "%" },
                 { value: "flat", label: "₹" },
               ]}
-              value={priceInfo.discountMethod}
-              onChange={(value) =>
-                setPriceInfo({ ...priceInfo, discountMethod: value })
-              }
+              value={productData.priceInfo.discount.method}
+              onChange={(value) => handleDiscountChange(value, "method")}
             />
           </div>
         </div>

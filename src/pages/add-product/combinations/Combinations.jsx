@@ -1,42 +1,51 @@
 import "./Combinations.css";
 
 // React imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Component imports
 import ToggleButton from "../../../components/toggle-button/ToggleButton";
 
-function Combinations() {
-  const [combinations, setCombinations] = useState([
-    {
-      name: "M/Black",
-      sku: "ABC12",
-      inStock: false,
-      quantity: "",
-    },
-    {
-      name: "M/Red",
-      sku: "SDF3",
-      inStock: true,
-      quantity: "5",
-    },
-    {
-      name: "L/Black",
-      sku: "HWE2",
-      inStock: false,
-      quantity: "9",
-    },
-    {
-      name: "L/Red",
-      sku: "ABC12",
-      inStock: true,
-      quantity: "9",
-    },
-  ]);
+// Context imports
+import { useProductContext } from "../../../contexts/ProductContext";
 
-  const checkDuplicateSku = (sku, index) => {
-    return combinations.some((combo, i) => i !== index && combo.sku === sku);
-  };
+function Combinations() {
+  const [combinations, setCombinations] = useState({});
+
+  const { productData, setProductData } = useProductContext();
+
+  useEffect(() => {
+    // Generate combinations based on variants
+    if (productData.variants.length > 0) {
+      const newCombinations = {};
+
+      const generateCombos = (variants, current = [], index = 0) => {
+        if (index === variants.length) {
+          const name = current.join("/");
+
+          if (!combinations[name]) {
+            newCombinations[name] = {
+              name,
+              sku: "",
+              inStock: false,
+              quantity: "",
+            };
+          } else {
+            newCombinations[name] = combinations[name];
+          }
+          return;
+        }
+
+        variants[index].values.forEach((value) => {
+          generateCombos(variants, [...current, value], index + 1);
+        });
+      };
+
+      generateCombos(productData.variants);
+      setCombinations(newCombinations);
+      setProductData((prev) => ({ ...prev, combinations: newCombinations }));
+    }
+  }, [productData.variants]);
 
   return (
     <div className="combinations-form">
@@ -47,8 +56,8 @@ function Combinations() {
         <p>Quantity</p>
       </div>
 
-      {combinations.map((combo, index) => (
-        <div key={combo.name} className="combination-row">
+      {Object.entries(combinations).map(([key, combo]) => (
+        <div key={key} className="combination-row">
           <p>{combo.name}</p>
 
           <div className="sku-field">
@@ -61,16 +70,16 @@ function Combinations() {
               id="sku-input"
               value={combo.sku}
               onChange={(event) => {
-                const newCombinations = [...combinations];
-                newCombinations[index].sku = event.target.value;
+                const newCombinations = { ...combinations };
+                newCombinations[key].sku = event.target.value;
                 setCombinations(newCombinations);
+                setProductData((prev) => ({
+                  ...prev,
+                  combinations: newCombinations,
+                }));
               }}
               className="form-input"
             />
-
-            {checkDuplicateSku(combo.sku, index) && (
-              <div className="error-message">Duplicate SKU</div>
-            )}
           </div>
 
           <div className="toggle-field">
@@ -81,16 +90,20 @@ function Combinations() {
               ]}
               value={combo.inStock}
               onChange={(value) => {
-                const newCombinations = [...combinations];
-                newCombinations[index].inStock = value;
+                const newCombinations = { ...combinations };
+                newCombinations[key].inStock = value;
                 setCombinations(newCombinations);
+                setProductData((prev) => ({
+                  ...prev,
+                  combinations: newCombinations,
+                }));
               }}
             />
           </div>
 
           <div className="quantity-field">
             <label htmlFor="quantity-input" className="sr-only">
-              Enter the quantity
+              Enter desired quantity
             </label>
 
             <input
@@ -98,9 +111,13 @@ function Combinations() {
               id="quantity-input"
               value={combo.quantity}
               onChange={(event) => {
-                const newCombinations = [...combinations];
-                newCombinations[index].quantity = event.target.value;
+                const newCombinations = { ...combinations };
+                newCombinations[key].quantity = event.target.value;
                 setCombinations(newCombinations);
+                setProductData((prev) => ({
+                  ...prev,
+                  combinations: newCombinations,
+                }));
               }}
               className="form-input"
             />

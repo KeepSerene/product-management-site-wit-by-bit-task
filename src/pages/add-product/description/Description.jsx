@@ -1,57 +1,72 @@
 import "./Description.css";
 
-// React imports
-import { useState } from "react";
-
 // Library imports
 import { Image } from "lucide-react";
 
+// Context imports
+import { useProductContext } from "../../../contexts/ProductContext";
+
 function Description() {
-  const [formData, setFormData] = useState({
-    name: "",
-    category: "Shoes",
-    brand: "",
-    image: null,
-  });
+  const { productData, setProductData, categories } = useProductContext();
+
+  const handleChange = (field, value) => {
+    setProductData((prev) => ({
+      ...prev,
+      description: {
+        ...prev.description,
+        [field]: value,
+      },
+    }));
+  };
 
   return (
     <div className="description-form">
       <div className="form-group">
-        <label className="form-label">Product name *</label>
+        <label htmlFor="product-name-input" className="form-label">
+          Product name *
+        </label>
 
         <input
           type="text"
+          id="product-name-input"
+          value={productData.description.name}
+          onChange={(event) => handleChange("name", event.target.value)}
           className="form-input"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
       </div>
 
       <div className="form-group">
-        <label className="form-label">Category *</label>
+        <label htmlFor="category-select-input" className="form-label">
+          Category *
+        </label>
 
         <select
+          id="category-select-input"
+          value={productData.description.category}
+          onChange={(event) => handleChange("category", event.target.value)}
           className="form-input"
-          value={formData.category}
-          onChange={(event) =>
-            setFormData({ ...formData, category: event.target.value })
-          }
         >
-          <option value="Shoes">Shoes</option>
-          <option value="T-shirt">T-shirt</option>
+          <option value="">Select a category</option>
+
+          {categories.map((category) => (
+            <option key={category.id} value={category.name}>
+              {category.name}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="form-group">
-        <label className="form-label">Brand *</label>
+        <label htmlFor="brand-input" className="form-label">
+          Brand *
+        </label>
 
         <input
           type="text"
+          id="brand-input"
+          value={productData.description.brand}
+          onChange={(event) => handleChange("brand", event.target.value)}
           className="form-input"
-          value={formData.brand}
-          onChange={(event) =>
-            setFormData({ ...formData, brand: event.target.value })
-          }
         />
       </div>
 

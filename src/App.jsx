@@ -12,25 +12,30 @@ import Combinations from "./pages/add-product/combinations/Combinations";
 import PriceInfo from "./pages/add-product/price-info/PriceInfo";
 import OutputJSON from "./pages/output-json/OutputJSON";
 
+// Context provider imports
+import { ProductContextProvider } from "./contexts/ProductContext";
+
 function App() {
   return (
     <BrowserRouter>
-      <div className="app">
-        <div className="app-wrapper">
-          <Routes>
-            <Route path="/" element={<Home />} />
+      <ProductContextProvider>
+        <div className="app">
+          <div className="app-wrapper">
+            <Routes>
+              <Route path="/" element={<Home />} />
 
-            <Route path="/add-product" element={<AddProduct />}>
-              <Route path="description" element={<Description />} />
-              <Route path="variants" element={<Variants />} />
-              <Route path="combinations" element={<Combinations />} />
-              <Route path="price-info" element={<PriceInfo />} />
-            </Route>
+              <Route path="/add-product" element={<AddProduct />}>
+                <Route path="description" element={<Description />} />
+                <Route path="variants" element={<Variants />} />
+                <Route path="combinations" element={<Combinations />} />
+                <Route path="price-info" element={<PriceInfo />} />
+              </Route>
 
-            <Route path="/output-json" element={<OutputJSON />} />
-          </Routes>
+              <Route path="/output-json" element={<OutputJSON />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </ProductContextProvider>
     </BrowserRouter>
   );
 }

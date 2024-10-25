@@ -11,39 +11,34 @@ import { Plus } from "lucide-react";
 import CategoryCard from "../../components/category-card/CategoryCard";
 import Modal from "../../components/modal/Modal";
 
+// Context imports
+import { useProductContext } from "../../contexts/ProductContext";
+
 function Home() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [categories, setCategories] = useState([
-    { id: "abc", name: "Shoes" },
-    { id: "xyz", name: "T-shirt" },
-  ]);
-
-  const [newCategory, setNewCategory] = useState("");
+  const { categories, addCategory } = useProductContext();
+  const [newCategoryName, setNewCategoryName] = useState("");
 
   const handleAddCategory = () => {
-    if (newCategory.trim()) {
-      setCategories([
-        ...categories,
-        {
-          id: Math.random().toString(36).substr(2, 9),
-          name: newCategory,
-        },
-      ]);
+    if (newCategoryName.trim()) {
+      addCategory(newCategoryName);
       setShowModal(false);
-      setNewCategory("");
+      setNewCategoryName("");
     }
   };
 
   return (
     <div className="wrapper">
-      <div className="home-header">
+      <section className="home-header">
         <h1 className="page-title">Products</h1>
+
         <div className="home-buttons">
           <button className="button-primary" onClick={() => setShowModal(true)}>
             <Plus size={16} />
             Add Category
           </button>
+
           <button
             className="button-primary"
             onClick={() => navigate("/add-product/description")}
@@ -52,39 +47,52 @@ function Home() {
             Add Product
           </button>
         </div>
-      </div>
+      </section>
 
       {categories.map((category) => (
-        <CategoryCard
-          key={category.id}
-          category={category}
-          products={[]} // Add sample products here
-        />
+        <CategoryCard key={category.id} category={category} products={[]} />
       ))}
 
       {showModal && (
-        <Modal title="Add Category" onClose={() => setShowModal(false)}>
-          <div className="form-group">
-            <label className="form-label">Category name *</label>
-            <input
-              type="text"
-              className="form-input"
-              placeholder="T-shirt"
-              value={newCategory}
-              onChange={(e) => setNewCategory(e.target.value)}
-            />
-          </div>
-          <div className="modal-buttons">
-            <button
-              className="button-secondary"
-              onClick={() => setShowModal(false)}
-            >
-              Cancel
-            </button>
-            <button className="button-primary" onClick={handleAddCategory}>
-              Save
-            </button>
-          </div>
+        <Modal
+          title="Add Category"
+          onClose={() => setShowModal(false)}
+          onSubmit={handleAddCategory}
+        >
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+
+              handleAddCategory();
+            }}
+          >
+            <div className="form-group">
+              <label className="form-label">Category name *</label>
+
+              <input
+                type="text"
+                className="form-input"
+                placeholder="T-shirt"
+                value={newCategoryName}
+                onChange={(event) => setNewCategoryName(event.target.value)}
+                required
+              />
+            </div>
+
+            <div className="modal-buttons">
+              <button
+                type="button"
+                className="button-secondary"
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </button>
+
+              <button type="submit" className="button-primary">
+                Save
+              </button>
+            </div>
+          </form>
         </Modal>
       )}
     </div>
