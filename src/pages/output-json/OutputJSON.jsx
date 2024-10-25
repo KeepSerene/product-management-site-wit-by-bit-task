@@ -1,4 +1,4 @@
-import "./OutputJson.css";
+import "./OutputJSON.css";
 
 // Library import
 import { Home } from "lucide-react";
