@@ -4,7 +4,7 @@ import "./AddProduct.css";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 // Component imports
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 
 const STEPS = [
   { path: "description", label: "Description" },
