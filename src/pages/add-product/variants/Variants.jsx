@@ -29,7 +29,7 @@ function Variants() {
   };
 
   return (
-    <div className="variants-form">
+    <div className="variants-form form">
       <div className="variants-header">
         <p className="option-column">Option *</p>
         <p className="values-column">Values *</p>
@@ -78,10 +78,11 @@ function Variants() {
 
             <button
               type="button"
-              className="delete-button"
               onClick={() => handleDeleteOption(optionIndex)}
+              aria-label="Click to delete the current option"
+              className="delete-button"
             >
-              <Trash2 size={16} />
+              <Trash2 size={20} />
             </button>
           </div>
         </div>

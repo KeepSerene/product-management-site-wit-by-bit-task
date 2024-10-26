@@ -38,10 +38,17 @@
 }
 
 .delete-button {
-  background-color: none;
+  background-color: transparent;
   color: var(--color-error);
   border: none;
-  padding: var(--space-xs);
+  border-radius: 50%;
+  padding: var(--space-sm);
+
+  transition: background-color 250ms ease-in-out;
+}
+
+.delete-button:where(:hover, :focus-visible) {
+  background-color: var(--color-background);
 }
 
 .add-option-button {

@@ -13,7 +13,11 @@ function Breadcrumb({ steps, activeStep }) {
         <Fragment key={step}>
           <div
             className={`breadcrumb-item ${
-              activeStep === index ? "active" : ""
+              activeStep === index
+                ? "active"
+                : index < activeStep
+                ? "completed"
+                : ""
             }`}
           >
             {step}

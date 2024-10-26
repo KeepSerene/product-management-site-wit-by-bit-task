@@ -1,7 +1,7 @@
 import "./Home.css";
 
 // React imports
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Library imports
 import { useNavigate } from "react-router-dom";
@@ -16,17 +16,28 @@ import { useProductContext } from "../../contexts/ProductContext";
 
 function Home() {
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
+  const [shouldShowModal, setShouldShowModal] = useState(false);
   const { categories, addCategory } = useProductContext();
   const [newCategoryName, setNewCategoryName] = useState("");
+
+  const categoryButtonRef = useRef(null);
+  const modalInputRef = useRef(null);
 
   const handleAddCategory = () => {
     if (newCategoryName.trim()) {
       addCategory(newCategoryName);
-      setShowModal(false);
+      setShouldShowModal(false);
       setNewCategoryName("");
     }
   };
+
+  const handleCloseModal = () => {
+    setShouldShowModal(false);
+
+    categoryButtonRef.current?.focus();
+  };
+
+  useEffect(() => modalInputRef.current?.focus(), [shouldShowModal]);
 
   return (
     <div className="wrapper">
@@ -34,14 +45,20 @@ function Home() {
         <h1 className="page-title">Products</h1>
 
         <div className="home-buttons">
-          <button className="button-primary" onClick={() => setShowModal(true)}>
+          <button
+            type="button"
+            ref={categoryButtonRef}
+            onClick={() => setShouldShowModal(true)}
+            className="button-secondary"
+          >
             <Plus size={16} />
             Add Category
           </button>
 
           <button
-            className="button-primary"
+            type="button"
             onClick={() => navigate("/add-product/description")}
+            className="button-primary"
           >
             <Plus size={16} />
             Add Product
@@ -53,10 +70,10 @@ function Home() {
         <CategoryCard key={category.id} category={category} products={[]} />
       ))}
 
-      {showModal && (
+      {shouldShowModal && (
         <Modal
           title="Add Category"
-          onClose={() => setShowModal(false)}
+          onClose={() => setShouldShowModal(false)}
           onSubmit={handleAddCategory}
         >
           <form
@@ -71,11 +88,12 @@ function Home() {
 
               <input
                 type="text"
-                className="form-input"
-                placeholder="T-shirt"
+                ref={modalInputRef}
                 value={newCategoryName}
                 onChange={(event) => setNewCategoryName(event.target.value)}
                 required
+                placeholder="T-shirt"
+                className="form-input"
               />
             </div>
 
@@ -83,7 +101,7 @@ function Home() {
               <button
                 type="button"
                 className="button-secondary"
-                onClick={() => setShowModal(false)}
+                onClick={handleCloseModal}
               >
                 Cancel
               </button>

@@ -48,7 +48,7 @@ function Combinations() {
   }, [productData.variants]);
 
   return (
-    <div className="combinations-form">
+    <div className="combinations-form form">
       <div className="combinations-header">
         <p>Combination</p>
         <p>SKU *</p>

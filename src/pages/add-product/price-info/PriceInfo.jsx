@@ -33,7 +33,7 @@ function PriceInfo() {
   };
 
   return (
-    <div className="price-info-form">
+    <div className="price-info-form form">
       <div className="form-group">
         <label htmlFor="price-input" className="form-label">
           Price *
@@ -45,6 +45,8 @@ function PriceInfo() {
           <input
             type="number"
             id="price-input"
+            min={0}
+            step={0.01}
             value={productData.priceInfo.priceInr}
             onChange={(event) => handlePriceChange(event.target.value)}
             className="form-input price-input"
@@ -61,6 +63,8 @@ function PriceInfo() {
           <input
             type="number"
             id="discount-input"
+            min={0}
+            step={0.5}
             value={productData.priceInfo.discount.value}
             onChange={(event) =>
               handleDiscountChange(event.target.value, "value")

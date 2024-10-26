@@ -16,6 +16,7 @@
   --color-tag-background: hsl(0, 0%, 94%);
   --color-disabled: hsla(200, 32%, 93%, 0.6);
   --color-border: hsla(0, 0%, 0%, 0.18);
+  --color-highlight-breadcrumb: hsl(203, 72%, 92%);
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -26,9 +27,9 @@
 }
 
 /* Responsive breakpoints:
-  Mobiles <= 600px
-  601px <= Tablets <= 900px
-  Desktops >= 901px
+  Mobiles <= 480px
+  Tablets <= 768px, or Tablets <= 992px
+  Desktops > 992px
 */
 
 *,
@@ -103,6 +104,7 @@ h6 {
 }
 
 input,
+select,
 textarea,
 button {
   font: inherit;
@@ -114,14 +116,14 @@ button {
 
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
-  *,
+  /* *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
+  } */
 }
 
 body {

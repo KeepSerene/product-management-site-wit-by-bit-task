@@ -20,7 +20,7 @@ function Description() {
   };
 
   return (
-    <div className="description-form">
+    <div className="description-form form">
       <div className="form-group">
         <label htmlFor="product-name-input" className="form-label">
           Product name *
