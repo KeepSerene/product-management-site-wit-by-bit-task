@@ -27,3 +27,7 @@
   background-color: var(--color-primary);
   color: var(--color-white);
 }
+
+.form-group:has(.upload-button) {
+  margin-bottom: 0;
+}

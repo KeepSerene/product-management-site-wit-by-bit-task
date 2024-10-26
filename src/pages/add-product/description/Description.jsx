@@ -6,8 +6,15 @@ import { Image } from "lucide-react";
 // Context imports
 import { useProductContext } from "../../../contexts/ProductContext";
 
+// React imports
+import { useEffect, useRef } from "react";
+
 function Description() {
   const { productData, setProductData, categories } = useProductContext();
+
+  const productNameInputRef = useRef(null);
+
+  useEffect(() => productNameInputRef.current?.focus(), []);
 
   const handleChange = (field, value) => {
     setProductData((prev) => ({
@@ -28,6 +35,7 @@ function Description() {
 
         <input
           type="text"
+          ref={productNameInputRef}
           id="product-name-input"
           value={productData.description.name}
           onChange={(event) => handleChange("name", event.target.value)}

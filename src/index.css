@@ -17,6 +17,9 @@
   --color-disabled: hsla(200, 32%, 93%, 0.6);
   --color-border: hsla(0, 0%, 0%, 0.18);
   --color-highlight-breadcrumb: hsl(203, 72%, 92%);
+  --color-toggle-button-active: hsl(200, 32%, 93%);
+  --color-toggle-switch-active: hsl(222, 47%, 11%);
+  --color-toggle-switch-inactive: hsl(214, 32%, 91%);
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -29,7 +32,7 @@
 /* Responsive breakpoints:
   Mobiles <= 480px
   Tablets <= 768px, or Tablets <= 992px
-  Desktops > 992px
+  Desktops > 768px or 992px
 */
 
 *,
@@ -116,14 +119,14 @@ button {
 
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
-  /* *,
+  *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  } */
+  }
 }
 
 body {

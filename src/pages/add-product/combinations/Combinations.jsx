@@ -1,7 +1,7 @@
 import "./Combinations.css";
 
 // React imports
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Component imports
 import ToggleButton from "../../../components/toggle-button/ToggleButton";
@@ -11,8 +11,11 @@ import { useProductContext } from "../../../contexts/ProductContext";
 
 function Combinations() {
   const [combinations, setCombinations] = useState({});
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const { productData, setProductData } = useProductContext();
+
+  const firstSKUInputRef = useRef(null);
 
   useEffect(() => {
     // Generate combinations based on variants
@@ -47,8 +50,17 @@ function Combinations() {
     }
   }, [productData.variants]);
 
+  // Handle initial focus only
+  useEffect(() => {
+    if (isInitialLoad && Object.keys(combinations).length > 0) {
+      firstSKUInputRef.current?.focus();
+      setIsInitialLoad(false); // Prevent future focuses
+    }
+  }, [combinations, isInitialLoad]);
+
   return (
     <div className="combinations-form form">
+      {/* Desktop headers */}
       <div className="combinations-header">
         <p>Combination</p>
         <p>SKU *</p>
@@ -56,17 +68,24 @@ function Combinations() {
         <p>Quantity</p>
       </div>
 
-      {Object.entries(combinations).map(([key, combo]) => (
+      {Object.entries(combinations).map(([key, combo], index) => (
         <div key={key} className="combination-row">
-          <p>{combo.name}</p>
+          {/* "field-label & field-groups are added because of a smaller-screen-friendly layout" */}
+          <p className="combo-name">
+            <span className="field-label">Combination: </span>
+            {combo.name}
+          </p>
 
-          <div className="sku-field">
+          <div className="field-group sku-field">
+            <span className="field-label">SKU *</span>
+
             <label htmlFor="sku-input" className="sr-only">
               Enter SKU
             </label>
 
             <input
               type="text"
+              ref={index === 0 ? firstSKUInputRef : null}
               id="sku-input"
               value={combo.sku}
               onChange={(event) => {
@@ -82,7 +101,9 @@ function Combinations() {
             />
           </div>
 
-          <div className="toggle-field">
+          <div className="field-group toggle-field">
+            <span className="field-label">In stock</span>
+
             <ToggleButton
               options={[
                 { value: true, label: "On" },
@@ -98,10 +119,13 @@ function Combinations() {
                   combinations: newCombinations,
                 }));
               }}
+              variant="switch"
             />
           </div>
 
-          <div className="quantity-field">
+          <div className="field-group quantity-field">
+            <span className="field-label">Quantity</span>
+
             <label htmlFor="quantity-input" className="sr-only">
               Enter desired quantity
             </label>
@@ -119,6 +143,7 @@ function Combinations() {
                   combinations: newCombinations,
                 }));
               }}
+              disabled={!combo.inStock}
               className="form-input"
             />
           </div>

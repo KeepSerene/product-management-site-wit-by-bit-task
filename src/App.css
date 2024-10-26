@@ -20,7 +20,7 @@
 .button-primary {
   background-color: var(--color-primary);
   color: var(--color-white);
-  font-weight: 600;
+  font-weight: 500;
   border: none;
   border-radius: 8px;
   padding: var(--space-sm) var(--space-md);
@@ -39,7 +39,7 @@
 .button-secondary {
   background-color: var(--color-button-secondary);
   color: var(--color-primary);
-  font-weight: 600;
+  font-weight: 500;
   border: none;
   border-radius: 8px;
   padding: var(--space-sm) var(--space-md);

@@ -6,8 +6,15 @@ import ToggleButton from "../../../components/toggle-button/ToggleButton";
 // Context imports
 import { useProductContext } from "../../../contexts/ProductContext";
 
+// React imports
+import { useEffect, useRef } from "react";
+
 function PriceInfo() {
   const { productData, setProductData } = useProductContext();
+
+  const priceInputRef = useRef(null);
+
+  useEffect(() => priceInputRef.current?.focus(), []);
 
   const handlePriceChange = (value) => {
     setProductData((prev) => ({
@@ -44,6 +51,7 @@ function PriceInfo() {
 
           <input
             type="number"
+            ref={priceInputRef}
             id="price-input"
             min={0}
             step={0.01}

@@ -26,10 +26,6 @@
   align-items: center;
 }
 
-.discount-toggle-btn .toggle-button {
-  overflow: unset;
-}
-
 /* Mobile styles */
 @media (max-width: 480px) {
   .discount-row {

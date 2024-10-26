@@ -73,7 +73,7 @@ function Home() {
       {shouldShowModal && (
         <Modal
           title="Add Category"
-          onClose={() => setShouldShowModal(false)}
+          onClose={() => handleCloseModal()}
           onSubmit={handleAddCategory}
         >
           <form

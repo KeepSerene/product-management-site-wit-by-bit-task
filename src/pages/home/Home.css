@@ -8,6 +8,7 @@
 
 .home-buttons {
   display: flex;
+  align-items: center;
   gap: var(--space-md);
 }
 
@@ -20,7 +21,5 @@
 
   .home-buttons {
     flex-direction: column;
-
-    width: 100%;
   }
 }
