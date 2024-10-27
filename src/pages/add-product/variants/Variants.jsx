@@ -42,9 +42,9 @@ function Variants() {
 
       {options.map((option, optionIndex) => (
         <div key={optionIndex} className="option-row">
-          {/* "field-label & field-groups are added because of a smaller-screen-friendly layout" */}
-          <div className="field-group option-column">
-            <span className="field-label">Option *</span>
+          {/* "variants-field-label & variants-field-group are introduced because of a small-screen-friendly layout" */}
+          <div className="variants-field-group option-column">
+            <span className="variants-field-label">Option *</span>
 
             <label htmlFor={`option-input${optionIndex}`} className="sr-only">
               Enter an option
@@ -68,8 +68,8 @@ function Variants() {
             )}
           </div>
 
-          <div className="field-group values-column">
-            <span className="field-label">Values *</span>
+          <div className="variants-field-group values-column">
+            <span className="variants-field-label">Values *</span>
 
             <label htmlFor={`value-input${optionIndex}`} className="sr-only">
               Enter the corresponding value

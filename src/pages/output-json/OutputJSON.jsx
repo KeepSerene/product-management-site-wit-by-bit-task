@@ -36,8 +36,9 @@ function OutputJson() {
         <h1 className="page-title">Output JSON</h1>
 
         <button
-          className="button-secondary back-home-button"
+          type="button"
           onClick={() => navigate("/")}
+          className="button-primary back-home-button"
         >
           <Home size={16} />
           Back to Home

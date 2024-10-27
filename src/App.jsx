@@ -11,6 +11,7 @@ import Variants from "./pages/add-product/variants/Variants";
 import Combinations from "./pages/add-product/combinations/Combinations";
 import PriceInfo from "./pages/add-product/price-info/PriceInfo";
 import OutputJSON from "./pages/output-json/OutputJSON";
+import NotFound from "./pages/not-found/NotFound";
 
 // Context provider imports
 import { ProductContextProvider } from "./contexts/ProductContext";
@@ -32,6 +33,7 @@ function App() {
               </Route>
 
               <Route path="/output-json" element={<OutputJSON />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </div>

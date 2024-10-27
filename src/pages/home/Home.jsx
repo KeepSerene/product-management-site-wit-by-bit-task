@@ -40,7 +40,7 @@ function Home() {
   useEffect(() => modalInputRef.current?.focus(), [shouldShowModal]);
 
   return (
-    <div className="wrapper">
+    <div className="home">
       <section className="home-header">
         <h1 className="page-title">Products</h1>
 

@@ -68,87 +68,93 @@ function Combinations() {
         <p>Quantity</p>
       </div>
 
-      {Object.entries(combinations).map(([key, combo], index) => (
-        <div key={key} className="combination-row">
-          {/* "field-label & field-groups are added because of a smaller-screen-friendly layout" */}
-          <p className="combo-name">
-            <span className="field-label">Combination: </span>
-            {combo.name}
-          </p>
+      {Object.keys(combinations).length > 0 ? (
+        Object.entries(combinations).map(([key, combo], index) => (
+          <div key={key} className="combination-row">
+            {/* "combinations-field-label & combinations-field-group are introduced because of a small-screen-friendly layout" */}
+            <p className="combo-name">
+              <span className="combinations-field-label">Combination: </span>
+              {combo.name}
+            </p>
 
-          <div className="field-group sku-field">
-            <span className="field-label">SKU *</span>
+            <div className="combinations-field-group sku-field">
+              <span className="combinations-field-label">SKU *</span>
 
-            <label htmlFor="sku-input" className="sr-only">
-              Enter SKU
-            </label>
+              <label htmlFor={`sku-input-${key}`} className="sr-only">
+                Enter SKU
+              </label>
 
-            <input
-              type="text"
-              ref={index === 0 ? firstSKUInputRef : null}
-              id="sku-input"
-              value={combo.sku}
-              onChange={(event) => {
-                const newCombinations = { ...combinations };
-                newCombinations[key].sku = event.target.value;
-                setCombinations(newCombinations);
-                setProductData((prev) => ({
-                  ...prev,
-                  combinations: newCombinations,
-                }));
-              }}
-              className="form-input"
-            />
+              <input
+                type="text"
+                ref={index === 0 ? firstSKUInputRef : null}
+                id={`sku-input-${key}`}
+                value={combo.sku}
+                onChange={(event) => {
+                  const newCombinations = { ...combinations };
+                  newCombinations[key].sku = event.target.value;
+                  setCombinations(newCombinations);
+                  setProductData((prev) => ({
+                    ...prev,
+                    combinations: newCombinations,
+                  }));
+                }}
+                className="form-input"
+              />
+            </div>
+
+            <div className="combinations-field-group toggle-field">
+              <span className="combinations-field-label">In stock</span>
+
+              <ToggleButton
+                options={[
+                  { value: true, label: "On" },
+                  { value: false, label: "Off" },
+                ]}
+                value={combo.inStock}
+                onChange={(value) => {
+                  const newCombinations = { ...combinations };
+                  newCombinations[key].inStock = value;
+                  setCombinations(newCombinations);
+                  setProductData((prev) => ({
+                    ...prev,
+                    combinations: newCombinations,
+                  }));
+                }}
+                variant="switch"
+              />
+            </div>
+
+            <div className="combinations-field-group quantity-field">
+              <span className="combinations-field-label">Quantity</span>
+
+              <label htmlFor={`quantity-input-${key}`} className="sr-only">
+                Enter desired quantity
+              </label>
+
+              <input
+                type="number"
+                id={`quantity-input-${key}`}
+                value={combo.quantity}
+                onChange={(event) => {
+                  const newCombinations = { ...combinations };
+                  newCombinations[key].quantity = event.target.value;
+                  setCombinations(newCombinations);
+                  setProductData((prev) => ({
+                    ...prev,
+                    combinations: newCombinations,
+                  }));
+                }}
+                disabled={!combo.inStock}
+                className="form-input"
+              />
+            </div>
           </div>
-
-          <div className="field-group toggle-field">
-            <span className="field-label">In stock</span>
-
-            <ToggleButton
-              options={[
-                { value: true, label: "On" },
-                { value: false, label: "Off" },
-              ]}
-              value={combo.inStock}
-              onChange={(value) => {
-                const newCombinations = { ...combinations };
-                newCombinations[key].inStock = value;
-                setCombinations(newCombinations);
-                setProductData((prev) => ({
-                  ...prev,
-                  combinations: newCombinations,
-                }));
-              }}
-              variant="switch"
-            />
-          </div>
-
-          <div className="field-group quantity-field">
-            <span className="field-label">Quantity</span>
-
-            <label htmlFor="quantity-input" className="sr-only">
-              Enter desired quantity
-            </label>
-
-            <input
-              type="number"
-              id="quantity-input"
-              value={combo.quantity}
-              onChange={(event) => {
-                const newCombinations = { ...combinations };
-                newCombinations[key].quantity = event.target.value;
-                setCombinations(newCombinations);
-                setProductData((prev) => ({
-                  ...prev,
-                  combinations: newCombinations,
-                }));
-              }}
-              disabled={!combo.inStock}
-              className="form-input"
-            />
-          </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p className="variants-not-set-msg">
+          Please set product variants to continue configuration.
+        </p>
+      )}
     </div>
   );
 }
