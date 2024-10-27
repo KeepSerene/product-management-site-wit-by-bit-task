@@ -11,6 +11,7 @@ import { useProductContext } from "../../../contexts/ProductContext";
 
 function Variants() {
   const { setProductData } = useProductContext();
+
   const [options, setOptions] = useState([{ name: "", values: [""] }]);
 
   const firstOptionInputRef = useRef(null);
@@ -34,6 +35,8 @@ function Variants() {
 
   return (
     <div className="variants-form form">
+      <h2 className="form-title">Variants</h2>
+
       {/* Desktop headers */}
       <div className="variants-header">
         <p className="option-column">Option *</p>

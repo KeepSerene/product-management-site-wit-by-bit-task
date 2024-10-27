@@ -28,6 +28,8 @@ function Description() {
 
   return (
     <div className="description-form form">
+      <h2 className="form-title">Description</h2>
+
       <div className="form-group">
         <label htmlFor="product-name-input" className="form-label">
           Product name *

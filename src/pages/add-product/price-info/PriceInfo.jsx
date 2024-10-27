@@ -41,6 +41,8 @@ function PriceInfo() {
 
   return (
     <div className="price-info-form form">
+      <h2 className="form-title">Price Info</h2>
+
       <div className="form-group">
         <label htmlFor="price-input" className="form-label">
           Price *

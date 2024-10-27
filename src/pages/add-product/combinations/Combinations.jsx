@@ -60,6 +60,8 @@ function Combinations() {
 
   return (
     <div className="combinations-form form">
+      <h2 className="form-title">Combinations</h2>
+
       {/* Desktop headers */}
       <div className="combinations-header">
         <p>Combination</p>

@@ -16,9 +16,11 @@ import { useProductContext } from "../../contexts/ProductContext";
 
 function Home() {
   const navigate = useNavigate();
+
   const [shouldShowModal, setShouldShowModal] = useState(false);
-  const { categories, addCategory } = useProductContext();
   const [newCategoryName, setNewCategoryName] = useState("");
+
+  const { categories, addCategory } = useProductContext();
 
   const categoryButtonRef = useRef(null);
   const modalInputRef = useRef(null);

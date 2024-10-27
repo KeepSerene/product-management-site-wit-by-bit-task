@@ -9,6 +9,7 @@ import { useProductContext } from "../../contexts/ProductContext";
 
 function OutputJson() {
   const navigate = useNavigate();
+
   const { productData, categories } = useProductContext();
 
   const formatJSONData = () => {

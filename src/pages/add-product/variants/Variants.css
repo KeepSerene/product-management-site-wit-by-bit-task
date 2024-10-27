@@ -3,8 +3,10 @@
 }
 
 .variants-header {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
   font-weight: 500;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-sm);
 
   display: flex;
   gap: var(--space-lg);
@@ -95,14 +97,15 @@
   .variants-field-group {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: var(--space-sm);
   }
 
   .variants-field-label {
+    display: unset;
+
     color: var(--color-text-secondary);
     font-size: 0.875rem;
     font-weight: 500;
-    margin-bottom: var(--space-xs);
   }
 
   .option-column,

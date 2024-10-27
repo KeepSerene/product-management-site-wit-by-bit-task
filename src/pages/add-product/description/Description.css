@@ -4,13 +4,16 @@
 }
 
 #category-select-input {
+  color: var(--color-text-secondary);
   font-size: 0.875rem;
 }
 
 .upload-button {
   background-color: transparent;
   color: var(--color-primary);
+  font-size: 1rem;
   font-weight: 600;
+  text-transform: capitalize;
   border: 1px solid var(--color-primary);
   padding: var(--space-sm) var(--space-md);
   border-radius: 8px;
