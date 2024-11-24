@@ -39,10 +39,7 @@ function AddProduct() {
     <section className="add-product">
       <h1 className="page-title">Add Product</h1>
 
-      <Breadcrumb
-        steps={STEPS.map((step) => step.label)}
-        activeStep={currentStepIndex}
-      />
+      <Breadcrumb steps={STEPS} activeStep={currentStepIndex} />
 
       <div className="add-product-content">
         <Outlet />

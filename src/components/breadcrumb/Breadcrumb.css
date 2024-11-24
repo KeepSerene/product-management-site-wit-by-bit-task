@@ -14,12 +14,20 @@
 
   color: var(--color-text-secondary);
   font-weight: 500;
+  cursor: pointer;
 
   display: flex;
   align-items: center;
   gap: var(--space-sm);
 
   position: relative;
+
+  transition: color 250ms ease-in-out;
+}
+
+.breadcrumb-item:where(:hover, :focus) {
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 .breadcrumb-item.active {
